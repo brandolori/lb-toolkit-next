@@ -1,0 +1,19 @@
+* {
+    user-select: none;
+}
+
+body {
+    margin: 0px;
+}
+
+.header {
+    -webkit-app-region: drag;
+}
+
+.header * {
+    -webkit-app-region: none;
+}
+
+img {
+    -webkit-user-drag: none;
+}
