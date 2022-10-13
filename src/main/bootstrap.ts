@@ -6,7 +6,6 @@ import { getTableClient, startClipboardListener, stopClipboardListener } from ".
 import { isLogin, registerAtLogin, unregisterAtLogin } from "./login"
 import initMessageHandlers from './messageHandlers'
 import { createMediaTrays, destroyMediaTrays, createMainTray } from './trays'
-import { SettingsItems } from '../common/SettingsItems'
 import { resolveHtmlPath } from '../common/utils'
 
 let ignoreSingleCopy = false
@@ -42,10 +41,10 @@ const stopListeningToClibpoard = () => {
 }
 
 // enable clipboard listener, then register to settings change
-if (getSettingValue(SettingsItems.enableClipboardSync))
+if (getSettingValue("enableClipboardSync"))
     startListeningToClipboard()
 
-settingsChangeEmitter.on(SettingsItems.enableClipboardSync, (value) => {
+settingsChangeEmitter.on("enableClipboardSync", (value) => {
     if (value)
         startListeningToClipboard()
     else
@@ -175,7 +174,7 @@ const createMainWindow = () => {
 
 const onReady = () => {
     if (app.isPackaged) {
-        settingsChangeEmitter.on(SettingsItems.enableRunOnLogin, (value) => {
+        settingsChangeEmitter.on("enableRunOnLogin", (value) => {
             if (value)
                 registerAtLogin()
             else
@@ -190,10 +189,10 @@ const onReady = () => {
     })
 
     // enable media tray icons, then register on setting change
-    if (getSettingValue(SettingsItems.enableMediaControls))
+    if (getSettingValue("enableMediaControls"))
         createMediaTrays()
 
-    settingsChangeEmitter.on(SettingsItems.enableMediaControls, (value) => {
+    settingsChangeEmitter.on("enableMediaControls", (value) => {
         if (value)
             createMediaTrays()
         else
@@ -201,10 +200,10 @@ const onReady = () => {
     })
 
     // enable color picker, then register on setting change
-    if (getSettingValue(SettingsItems.enableColorPicker))
+    if (getSettingValue("enableColorPicker"))
         registerColorPicker()
 
-    settingsChangeEmitter.on(SettingsItems.enableColorPicker, (value) => {
+    settingsChangeEmitter.on("enableColorPicker", (value) => {
         if (value)
             registerColorPicker()
         else

@@ -2,19 +2,13 @@ import { Tray, Menu, app } from "electron"
 import path from "path"
 import robot from "robotjs"
 
+let next: Tray
 
-/** @type Tray */
-let next
+let prev: Tray
 
-/** @type Tray */
-let prev
+let playPause: Tray
 
-/** @type Tray */
-let playPause
-
-/** @type Tray */
-let mainIcon
-
+let mainIcon: Tray
 
 const createMediaTrays = () => {
     next = new Tray(getAssetPath("next.ico"))

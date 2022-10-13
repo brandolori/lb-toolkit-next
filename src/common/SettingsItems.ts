@@ -1,21 +1,19 @@
-const SettingsItems = {
-    enableColorPicker: "enableColorPicker",
-    enableMediaControls: "enableMediaControls",
-    enableRunOnLogin: "enableRunOnLogin",
-    enableClipboardSync: "enableClipboardSync",
-    azureStorageAccount: "azureStorageAccount",
-    azureSASToken: "azureSASToken",
-    azureTableName: "azureTableName",
+export type Settings = {
+    enableColorPicker: boolean,
+    enableMediaControls: boolean,
+    enableRunOnLogin: boolean,
+    enableClipboardSync: boolean,
+    azureStorageAccount: string,
+    azureSASToken: string,
+    azureTableName: string,
 }
 
-const DefaultValues = {
-    [SettingsItems.enableColorPicker]: true,
-    [SettingsItems.enableMediaControls]: true,
-    [SettingsItems.enableRunOnLogin]: true,
-    [SettingsItems.enableClipboardSync]: false,
-    [SettingsItems.azureStorageAccount]: "",
-    [SettingsItems.azureSASToken]: "",
-    [SettingsItems.azureTableName]: "",
+export const DefaultValues: Settings = {
+    enableColorPicker: true,
+    enableMediaControls: true,
+    enableRunOnLogin: true,
+    enableClipboardSync: false,
+    azureStorageAccount: "",
+    azureSASToken: "",
+    azureTableName: "",
 }
-
-export { SettingsItems, DefaultValues }

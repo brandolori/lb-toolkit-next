@@ -1,7 +1,6 @@
 import { ActionIcon, Alert, Button, Card, Group, NativeSelect, Space, Stack, Text } from "@mantine/core"
 import { useEffect, useState } from "react"
 import { AiOutlineReload, AiOutlineWarning } from "react-icons/ai"
-import { SettingsItems } from "../common/SettingsItems"
 
 type DateFilter = "today" | "this week" | "this month" | "all"
 
@@ -31,7 +30,7 @@ export default () => {
     useEffect(() => {
         updateClips()
         window.electronAPI.handleClipboardChange(() => updateClips())
-        window.electronAPI.getSettingValue(SettingsItems.enableClipboardSync)
+        window.electronAPI.getSettingValue("enableClipboardSync")
             .then(value => setSyncEnabled(!value))
     }, [dateFilter])
 

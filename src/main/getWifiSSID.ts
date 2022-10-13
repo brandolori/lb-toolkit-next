@@ -7,7 +7,6 @@ export default async () => {
 	const stdout = await handleCommand(cmd, args)
 	let ret
 
-	//@ts-ignore
 	ret = /^\s*SSID\s*: (.+)\s*$/gm.exec(stdout)
 	ret = ret && ret.length ? ret[1] : null
 
@@ -15,5 +14,5 @@ export default async () => {
 		throw new Error('Could not get SSID')
 	}
 
-	return ret
+	return ret as string
 }

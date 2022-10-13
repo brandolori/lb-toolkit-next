@@ -1,3 +1,4 @@
+import { Settings } from 'common/SettingsItems'
 import { contextBridge, ipcRenderer } from 'electron'
 
 // https://www.electronjs.org/docs/latest/tutorial/process-model
@@ -11,11 +12,11 @@ const additions = {
     fetchUpdates: () => ipcRenderer.invoke('cmd:fetchUpdates'),
     updatePackage: (packageName: string) => ipcRenderer.invoke('cmd:updatePackage', packageName),
     retrieveHypervisorState: () => ipcRenderer.invoke('cmd:retrieveHypervisorState'),
-    executeHypervisorCommand: (state: string) => ipcRenderer.invoke('cmd:executeHypervisorCommand', state),
+    executeHypervisorCommand: (state: boolean) => ipcRenderer.invoke('cmd:executeHypervisorCommand', state),
 
     currentRefreshRate: () => ipcRenderer.invoke('display:currentRefreshRate'),
     listRefreshRates: () => ipcRenderer.invoke('display:listRefreshRates'),
-    setRefreshRate: (refresh: number) => ipcRenderer.invoke('display:setRefreshRate', refresh),
+    setRefreshRate: (refresh: string) => ipcRenderer.invoke('display:setRefreshRate', refresh),
 
     calculateFolderSize: (path: string) => ipcRenderer.invoke("fs:calculateFolderSize", path),
     getEnvironmentVariable: (variable: string) => ipcRenderer.invoke("fs:getEnvironmentVariable", variable),
@@ -23,8 +24,8 @@ const additions = {
     deleteFolder: (path: string) => ipcRenderer.invoke("fs:deleteFolder", path),
     openFolder: (path: string) => ipcRenderer.send("fs:openFolder", path),
 
-    getSettingValue: (setting: string) => ipcRenderer.invoke("settings:getSettingValue", setting),
-    setSettingValue: (setting: string, value) => ipcRenderer.invoke("settings:setSettingValue", setting, value),
+    getSettingValue: (setting: keyof Settings) => ipcRenderer.invoke("settings:getSettingValue", setting),
+    setSettingValue: <T extends keyof Settings>(setting: T, value: Settings[T]) => ipcRenderer.invoke("settings:setSettingValue", setting, value),
 
     readyToShow: () => ipcRenderer.send('render:readyToShow'),
     appGetVersion: () => ipcRenderer.invoke("app:getVersion"),
@@ -37,7 +38,7 @@ const additions = {
     },
     clipboardPaste: (text: string) => ipcRenderer.send("clipboard:paste", text),
     fetchClips: (filter: string) => ipcRenderer.invoke('clipboard:fetchClips', filter),
-} as const
+}
 
 declare global {
     interface Window {

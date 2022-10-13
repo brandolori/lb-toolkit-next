@@ -1,5 +1,4 @@
 import path from 'path'
-import { SettingsItems } from '../common/SettingsItems'
 import { unregisterAtLogin, registerAtLogin } from './login'
 import { setSettingValue } from './settings'
 import { spawn } from 'child_process'
@@ -20,7 +19,7 @@ const isSquirrel = () => {
         if (cmd === '--squirrel-install' || cmd === '--squirrel-updated') {
             run(['--createShortcut=' + target + ''], app.quit)
             registerAtLogin()
-            setSettingValue(SettingsItems.enableRunOnLogin, true)
+            setSettingValue("enableRunOnLogin", true)
             return true
         }
         if (cmd === '--squirrel-uninstall') {

@@ -1,13 +1,12 @@
 import { AzureSASCredential, TableClient, odata } from "@azure/data-tables"
 import { getSettingValue } from "./settings"
 import clipboardListener from 'clipboard-event'
-import { SettingsItems } from "../common/SettingsItems"
 import { ipcMain } from "electron"
 
 const getTableClient = () => {
-    const account = getSettingValue(SettingsItems.azureStorageAccount)
-    const SASToken = getSettingValue(SettingsItems.azureSASToken)
-    const tableName = getSettingValue(SettingsItems.azureTableName)
+    const account = getSettingValue("azureStorageAccount")
+    const SASToken = getSettingValue("azureSASToken")
+    const tableName = getSettingValue("azureTableName")
     return new TableClient(
         `https://${account}.table.core.windows.net`,
         tableName,
@@ -29,7 +28,7 @@ const stopClipboardListener = () => {
 
 const fetchClips = async (filter) => {
     const data = []
-    const tableClient = await getTableClient()
+    const tableClient = getTableClient()
     const days = filter == "today" ? 1 :
         filter == "this week" ? 7 :
             filter == "this month" ? 30 : 100000

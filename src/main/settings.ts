@@ -2,27 +2,32 @@ import { app } from 'electron'
 import fs from 'fs'
 import path from "path"
 import { EventEmitter } from 'stream'
-import { DefaultValues } from "../common/SettingsItems"
+import { DefaultValues, Settings } from "../common/SettingsItems"
 
 const settingsFileName = "settings.json"
 
 const settingsFilePath = path.join(app.getPath("userData"), settingsFileName)
 
 const file = fs.readFileSync(settingsFilePath, { flag: "a+" })
-let data
+let data: Settings
 
 try {
-    data = JSON.parse(file.toString())
+    data = JSON.parse(file.toString()) as Settings
 } catch (e) {
     data = { ...DefaultValues }
     fs.writeFileSync(settingsFilePath, JSON.stringify(data))
 }
 
-const settingsChangeEmitter = new EventEmitter()
+type SettingsEventEmitter = {
+    on: (key: keyof Settings, callback: (value: any) => void) => void
+    emit: (key: keyof Settings, value: any) => void
+}
 
-const getSettingValue = (setting) => data[setting]
+const settingsChangeEmitter = new EventEmitter() as SettingsEventEmitter
 
-const setSettingValue = (setting, value) => {
+const getSettingValue = <T extends keyof Settings>(setting: T): Settings[T] => data[setting]
+
+const setSettingValue = <T extends keyof Settings>(setting: T, value: Settings[T]) => {
     data[setting] = value
     fs.writeFileSync(settingsFilePath, JSON.stringify(data))
     settingsChangeEmitter.emit(setting, value)

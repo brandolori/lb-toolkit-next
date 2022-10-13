@@ -1,6 +1,6 @@
 import { handleCommand } from '../common/utils'
 
-export default async ssid => {
+export default async (ssid: string) => {
 	const cmd = 'netsh'
 	const args = ['wlan', 'show', 'profile', `name=${ssid}`, 'key=clear']
 
@@ -14,5 +14,5 @@ export default async ssid => {
 		throw new Error('Could not get password')
 	}
 
-	return ret
+	return ret as string
 }

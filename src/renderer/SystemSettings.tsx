@@ -47,7 +47,7 @@ export default () => {
         setRefreshLoading(false)
     }
 
-    const changeRefreshRate = async (state: boolean) => {
+    const changeRefreshRate = async (state: string) => {
         setRefreshLoading(true)
         await window.electronAPI.setRefreshRate(state)
         await updateRefreshState()

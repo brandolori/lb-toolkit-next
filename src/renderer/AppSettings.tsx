@@ -1,28 +1,28 @@
 import { Button, Group, Stack, Switch } from "@mantine/core"
 import { substitutePath } from "./utils"
 import { useEffect, useState } from "react"
-import { SettingsItems } from "../common/SettingsItems"
+import { Settings } from "common/SettingsItems"
 
 type Setting = {
     name: string
-    key: string,
+    key: keyof Settings,
 }
 
 const settings: Setting[] = [
     {
-        key: SettingsItems.enableColorPicker,
+        key: "enableColorPicker",
         name: "Enable color picker"
     },
     {
-        key: SettingsItems.enableMediaControls,
+        key: "enableMediaControls",
         name: "Enable tray media controls"
     },
     {
-        key: SettingsItems.enableRunOnLogin,
+        key: "enableRunOnLogin",
         name: "Enable run on login"
     },
     {
-        key: SettingsItems.enableClipboardSync,
+        key: "enableClipboardSync",
         name: "Enable clipboard Sync"
     }
 ]
@@ -47,14 +47,14 @@ export default () => {
 
     const [settingsState, setSettingsState] = useState<SettingState[]>(defaultState)
 
-    const loadSetting = async (setting: string) => {
+    const loadSetting = async (setting: keyof Settings) => {
         const value = await window.electronAPI.getSettingValue(setting)
         setSettingsState((state) => state.map(el => el.key == setting
             ? { key: setting, value: value }
             : el))
     }
 
-    const changeSetting = async (setting: string, value: boolean) => {
+    const changeSetting = async (setting: keyof Settings, value: boolean) => {
         try {
             await window.electronAPI.setSettingValue(setting, value)
         } catch (e) { }

@@ -2,12 +2,7 @@ import sudo from 'sudo-prompt'
 const onString = "Auto"
 const offString = "Off"
 
-/**
- * 
- * @param {boolean} enabled 
- * @returns {Promise<void>}
- */
-const setHypervisor = (enabled) => {
+const setHypervisor = (enabled: boolean): Promise<void> => {
     const launchType = enabled ? onString : offString
     return new Promise<void>((res, rej) => {
         sudo.exec(`bcdedit /set hypervisorlaunchtype ${launchType}`,
@@ -21,11 +16,8 @@ const setHypervisor = (enabled) => {
         )
     })
 }
-/**
- * 
- * @returns {Promise<boolean>}
- */
-const getHypervisor = () => {
+
+const getHypervisor = (): Promise<boolean> => {
     return new Promise((res, rej) => {
         sudo.exec(`bcdedit /enum`,
             { name: "lb toolkit" },
