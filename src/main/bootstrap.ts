@@ -93,9 +93,7 @@ const createClipboardWindow = () => {
         x: cursorPoint.x,
         y: cursorPoint.y,
         webPreferences: {
-            preload: app.isPackaged
-                ? path.join(__dirname, 'preload.js')
-                : path.join(__dirname, '../../.erb/dll/preload.js'),
+            preload: path.join(__dirname, 'preload.js'),
             devTools: !app.isPackaged,
             webSecurity: false
         }
@@ -104,7 +102,6 @@ const createClipboardWindow = () => {
     windowsByWebcontentsId[clipboardWindow.webContents.id] = clipboardWindow
 
     clipboardWindow.removeMenu()
-    console.log("yo?")
     clipboardWindow.loadURL(resolveHtmlPath('index.html', "?page=clipboard"))
 
 
@@ -128,6 +125,7 @@ const showOrCreateMainWindow = () => {
 }
 
 const createMainWindow = () => {
+    console.log("PROVA DEL NOVE\n\n\n\n\UO")
     // Create the browser window.
     mainWindow = new BrowserWindow({
         show: false,
@@ -143,9 +141,7 @@ const createMainWindow = () => {
             height: 40
         },
         webPreferences: {
-            preload: app.isPackaged
-                ? path.join(__dirname, 'preload.js')
-                : path.join(__dirname, '../../.erb/dll/preload.js'),
+            preload: path.join(__dirname, 'preload.js'),
             devTools: !app.isPackaged,
             webSecurity: false,
             sandbox: true,
@@ -155,11 +151,6 @@ const createMainWindow = () => {
     windowsByWebcontentsId[mainWindow.webContents.id] = mainWindow
 
     mainWindow.removeMenu()
-
-    // and load the index.html of the app.
-    // mainWindow.loadURL(app.isPackaged
-    //     ? `file://${join(__dirname, '../build/index.html')}`
-    //     : 'http://localhost:3000')
 
     // Open the DevTools.
     mainWindow.loadURL(resolveHtmlPath('index.html'))
