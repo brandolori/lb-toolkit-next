@@ -1,14 +1,4 @@
-export type Settings = {
-    enableColorPicker: boolean,
-    enableMediaControls: boolean,
-    enableRunOnLogin: boolean,
-    enableClipboardSync: boolean,
-    azureStorageAccount: string,
-    azureSASToken: string,
-    azureTableName: string,
-}
-
-export const DefaultValues: Settings = {
+export const DefaultValues = {
     enableColorPicker: true,
     enableMediaControls: true,
     enableRunOnLogin: true,
@@ -17,3 +7,5 @@ export const DefaultValues: Settings = {
     azureSASToken: "",
     azureTableName: "",
 }
+
+export type Settings = typeof DefaultValues
