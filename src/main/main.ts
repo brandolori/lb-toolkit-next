@@ -1,5 +1,5 @@
 import { app } from 'electron'
-import { isSquirrel } from './squirrel'
+// import { isSquirrel } from './squirrel'
 import onReady from "./bootstrap"
 // Module to create native browser window.
 

@@ -5,6 +5,7 @@ import { getHypervisor, setHypervisor } from "./hypervisor"
 import { getSettingValue, setSettingValue } from "./settings"
 import { getAssetPath, handleCommand } from "../common/utils"
 import sudo from 'sudo-prompt'
+import emptyTrash from "empty-trash"
 
 export default () => {
     ipcMain.handle('cmd:fetchUpdates', async () => {
@@ -63,7 +64,6 @@ export default () => {
 
         // special case for the recycle bin: it's not a real folder
         if (path == "shell:RecycleBinFolder") {
-            const { default: emptyTrash } = await import('empty-trash')
             return emptyTrash()
         }
 

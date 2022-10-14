@@ -15,9 +15,6 @@
     "link-modules": "node -r ts-node/register ../../.erb/scripts/link-modules.ts"
   },
   "dependencies": {
-    "clipboard-event": "^1.6.0",
-    "empty-trash": "^4.0.0",
-    "robotjs": "^0.6.0",
-    "sudo-prompt": "^9.2.1"
+    "robotjs": "^0.6.0"
   }
 }

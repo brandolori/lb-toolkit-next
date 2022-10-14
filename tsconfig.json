@@ -10,7 +10,7 @@
     "jsx": "react-jsx",
     "sourceMap": true,
     "baseUrl": "./src",
-    "moduleResolution": "Node16",
+    "moduleResolution": "Node",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowJs": true,
