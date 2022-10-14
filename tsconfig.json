@@ -14,12 +14,12 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowJs": true,
-    "outDir": ".erb/dll"
+    "outDir": "tooling/devbuilds"
   },
   "exclude": [
     "test",
     "release/build",
     "release/app/dist",
-    ".erb/dll"
+    "tooling/devbuilds"
   ]
 }

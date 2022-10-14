@@ -32,18 +32,18 @@
             "url": "https://github.com/amilajack"
         }
     ],
-    "main": "./.erb/dll/main.js",
+    "main": "./tooling/devbuilds/main.js",
     "scripts": {
         "build": "concurrently \"npm run build:main\" \"npm run build:renderer\"",
-        "build:main": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.main.prod.ts",
-        "build:renderer": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.renderer.prod.ts",
-        "postinstall": "ts-node .erb/scripts/check-native-dep.js && electron-builder install-app-deps",
-        "package": "ts-node ./.erb/scripts/clean.js dist && npm run build && electron-builder build --publish never",
+        "build:main": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack --config ./tooling/configs/webpack.config.main.prod.ts",
+        "build:renderer": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack --config ./tooling/configs/webpack.config.renderer.prod.ts",
+        "postinstall": "ts-node tooling/scripts/check-native-dep.js && electron-builder install-app-deps",
+        "package": "ts-node ./tooling/scripts/clean.js dist && npm run build && electron-builder build --publish never",
         "rebuild": "electron-rebuild --parallel --types prod,dev,optional --module-dir release/app",
         "start:electron": "cross-env NODE_ENV=development electron .",
-        "start:main": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.main.dev.ts",
-        "start:preload": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.preload.dev.ts",
-        "start:webpack": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack serve --config ./.erb/configs/webpack.config.renderer.dev.ts"
+        "start:main": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./tooling/configs/webpack.config.main.dev.ts",
+        "start:preload": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./tooling/configs/webpack.config.preload.dev.ts",
+        "start:webpack": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack serve --config ./tooling/configs/webpack.config.renderer.dev.ts"
     },
     "browserslist": [],
     "dependencies": {
@@ -116,7 +116,7 @@
             "node_modules",
             "package.json"
         ],
-        "afterSign": ".erb/scripts/notarize.js",
+        "afterSign": "tooling/scripts/notarize.js",
         "mac": {
             "target": {
                 "target": "default",
