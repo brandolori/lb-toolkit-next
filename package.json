@@ -18,6 +18,7 @@
         "start:preload": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./tooling/configs/webpack.config.preload.dev.ts",
         "start:webpack": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack serve --config ./tooling/configs/webpack.config.renderer.dev.ts"
     },
+    "browserslist": [],
     "dependencies": {
         "electron-debug": "^3.2.0",
         "electron-log": "^4.4.8",

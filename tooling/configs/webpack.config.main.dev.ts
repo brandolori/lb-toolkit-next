@@ -17,6 +17,9 @@ const configuration: webpack.Configuration = {
     output: {
         path: webpackPaths.dllPath,
         filename: 'main.js',
+        library: {
+            type: 'umd',
+        },
     },
 
     plugins: [
