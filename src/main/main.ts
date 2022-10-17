@@ -18,7 +18,6 @@ if (!app.requestSingleInstanceLock()) {
 }
 
 if (canLoad) {
-    console.log("ciao")
     app.whenReady().then(() => onReady());
 
     app.on('window-all-closed', (ev) => {
