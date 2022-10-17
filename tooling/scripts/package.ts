@@ -1,10 +1,6 @@
-import builder from "electron-builder"
+import { build, Configuration } from "electron-builder"
 
-/**
-* @type {import('electron-builder').Configuration}
-* @see https://www.electron.build/configuration/configuration
-*/
-const options = {
+const options: Configuration = {
     compression: "maximum",
     productName: "LB Toolkit",
     appId: "com.lb.lbtoolkit",
@@ -33,7 +29,7 @@ const options = {
 }
 
 // Promise is returned
-builder.build({
+build({
     config: options
 })
     .then((result) => {

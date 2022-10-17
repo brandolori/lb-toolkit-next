@@ -8,9 +8,9 @@
   },
   "main": "./dist/main/main.js",
   "scripts": {
-    "rebuild": "node -r ts-node/register ../../tooling/scripts/electron-rebuild.js",
+    "rebuild": "ts-node ../../tooling/scripts/electron-rebuild.ts",
     "postinstall": "npm run rebuild && npm run link-modules",
-    "link-modules": "node -r ts-node/register ../../tooling/scripts/link-modules.ts"
+    "link-modules": "ts-node ../../tooling/scripts/link-modules.ts"
   },
   "dependencies": {
     "clipboard-event": "^1.6.0",
