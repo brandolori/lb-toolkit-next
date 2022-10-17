@@ -18,9 +18,8 @@
     "outDir": "tooling/devbuilds"
   },
   "exclude": [
-    "test",
     "release/build",
-    "release/app/dist",
+    "tooling/app/dist",
     "tooling/devbuilds"
   ]
 }

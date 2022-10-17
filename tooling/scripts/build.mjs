@@ -11,7 +11,7 @@ const options = {
     asar: false,
     npmRebuild: false,
     directories: {
-        app: "release/app",
+        app: "tooling/app",
         buildResources: "assets",
         output: "release/build"
     },

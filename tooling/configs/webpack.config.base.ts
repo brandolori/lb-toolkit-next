@@ -1,6 +1,6 @@
 import webpack from 'webpack'
 import webpackPaths from './webpack.paths'
-import { dependencies as externals } from '../../release/app/package.json'
+import { dependencies as externals } from '../../tooling/app/package.json'
 
 const configuration: webpack.Configuration = {
     externals: [...Object.keys(externals || {})],
