@@ -1,15 +1,15 @@
 import { app } from 'electron'
-// import { isSquirrel } from './squirrel'
+import { isSquirrel } from './squirrel'
 import onReady from "./bootstrap"
 // Module to create native browser window.
 
 let canLoad = true
 
-// // this package checks if we are in install mode and executes the install scripts
-// if (isSquirrel()) {
-//     canLoad = false
-//     app.quit()
-// }
+// this package checks if we are in install mode and executes the install scripts
+if (isSquirrel()) {
+    canLoad = false
+    app.quit()
+}
 
 // // make sure we are the only instance running, otherwise quit
 if (!app.requestSingleInstanceLock()) {

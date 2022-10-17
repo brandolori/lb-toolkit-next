@@ -1,14 +1,9 @@
 {
-    "description": "A foundation for scalable desktop apps",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/electron-react-boilerplate/electron-react-boilerplate.git"
-    },
-    "license": "MIT",
+    "name": "lb-toolkit-next",
+    "description": "Utils for personal use",
     "author": {
-        "name": "Electron React Boilerplate Maintainers",
-        "email": "electronreactboilerplate@gmail.com",
-        "url": "https://electron-react-boilerplate.js.org"
+        "email": "lori.barto@live.it",
+        "name": "Lorenzo Bartolini"
     },
     "main": "./tooling/devbuilds/main.js",
     "scripts": {
@@ -16,7 +11,7 @@
         "build:main": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack --config ./tooling/configs/webpack.config.main.prod.ts",
         "build:renderer": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack --config ./tooling/configs/webpack.config.renderer.prod.ts",
         "postinstall": "ts-node tooling/scripts/check-native-dep.js && electron-builder install-app-deps",
-        "package": "ts-node ./tooling/scripts/clean.js dist && npm run rebuild && npm run build && electron-builder build --publish never",
+        "package": "ts-node ./tooling/scripts/clean.js dist && npm run rebuild && npm run build && node build.mjs",
         "rebuild": "electron-rebuild --parallel --types prod,dev,optional --module-dir release/app",
         "start:electron": "cross-env NODE_ENV=development electron .",
         "start:main": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./tooling/configs/webpack.config.main.dev.ts",
@@ -26,6 +21,7 @@
     "browserslist": [],
     "dependencies": {
         "clipboard-event": "^1.6.0",
+        "electron-builder-squirrel-windows": "^23.6.0",
         "electron-debug": "^3.2.0",
         "electron-log": "^4.4.8",
         "electron-updater": "^5.2.3",
@@ -78,29 +74,5 @@
         "webpack-dev-server": "^4.10.0",
         "webpack-merge": "^5.8.0",
         "wifi-qr-code-generator": "^1.1.1"
-    },
-    "build": {
-        "productName": "ElectronReact",
-        "appId": "org.erb.ElectronReact",
-        "asar": false,
-        "npmRebuild": false,
-        "files": [
-            "dist",
-            "node_modules",
-            "package.json"
-        ],
-        "win": {
-            "target": [
-                "nsis"
-            ]
-        },
-        "directories": {
-            "app": "release/app",
-            "buildResources": "assets",
-            "output": "release/build"
-        },
-        "extraResources": [
-            "./assets/**"
-        ]
     }
 }
