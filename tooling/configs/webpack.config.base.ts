@@ -15,7 +15,6 @@ const configuration: webpack.Configuration = {
                 use: {
                     loader: 'ts-loader',
                     options: {
-                        // Remove this line to enable type checking in webpack builds
                         transpileOnly: true,
                         compilerOptions: {
                             module: 'esnext',
@@ -28,9 +27,10 @@ const configuration: webpack.Configuration = {
 
     output: {
         path: webpackPaths.srcPath,
-        // https://github.com/webpack/webpack/issues/1114
+        // chunkLoading: false,
+        chunkFormat: "module",
         library: {
-            type: 'commonjs2',
+            type: "module"
         },
     },
 
@@ -44,6 +44,9 @@ const configuration: webpack.Configuration = {
             NODE_ENV: 'production',
         }),
     ],
+    experiments: {
+        outputModule: true,
+    },
 }
 
 export default configuration

@@ -24,9 +24,6 @@ const configuration: webpack.Configuration = {
     output: {
         path: webpackPaths.distMainPath,
         filename: '[name].js',
-        library: {
-            type: 'umd',
-        },
     },
 
     optimization: {
