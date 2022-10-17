@@ -17,7 +17,7 @@ node_modules
 
 release/app/dist
 release/build
-tooling/dev
+tooling/devbuilds
 
 .idea
 npm-debug.log.*

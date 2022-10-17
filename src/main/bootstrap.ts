@@ -125,7 +125,6 @@ const showOrCreateMainWindow = () => {
 }
 
 const createMainWindow = () => {
-    console.log("PROVA DEL NOVE\n\n\n\n\UO")
     // Create the browser window.
     mainWindow = new BrowserWindow({
         show: false,
@@ -202,9 +201,7 @@ const onReady = () => {
     })
 
     globalShortcut.register("super+control+b", () => {
-        console.log("hello?")
         if (!clipboardWindow) {
-            console.log("anyone?")
             createClipboardWindow()
         }
     })

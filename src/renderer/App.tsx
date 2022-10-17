@@ -8,6 +8,7 @@ import Regex from './Regex'
 import Wifi from './Wifi'
 import Uppercase from './Uppercase'
 import ClipboardSync from './ClipboardSync'
+import favicon from "../../assets/favicon.png"
 
 const titleBarHeight = 41
 
@@ -17,7 +18,7 @@ const TitleBar = () =>
         height={titleBarHeight}
         className='header' p="xs">
         <Text style={{ marginTop: "auto", marginBottom: "auto" }} size="xs">
-            <img style={{ height: 15, verticalAlign: "text-bottom", marginRight: 5 }} src="favicon.ico" alt="" />LB Toolkit
+            <img style={{ height: 15, verticalAlign: "text-bottom", marginRight: 5 }} src={favicon} alt="" />LB Toolkit
         </Text>
     </Header>
 
