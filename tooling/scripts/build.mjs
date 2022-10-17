@@ -13,7 +13,7 @@ const options = {
     directories: {
         app: "tooling/app",
         buildResources: "assets",
-        output: "release/build"
+        output: "release"
     },
     extraResources: [
         "./assets/**"
