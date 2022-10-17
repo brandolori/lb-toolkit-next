@@ -1,20 +1,5 @@
 {
     "description": "A foundation for scalable desktop apps",
-    "keywords": [
-        "electron",
-        "boilerplate",
-        "react",
-        "typescript",
-        "ts",
-        "sass",
-        "webpack",
-        "hot",
-        "reload"
-    ],
-    "homepage": "https://github.com/electron-react-boilerplate/electron-react-boilerplate#readme",
-    "bugs": {
-        "url": "https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues"
-    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/electron-react-boilerplate/electron-react-boilerplate.git"
@@ -25,13 +10,6 @@
         "email": "electronreactboilerplate@gmail.com",
         "url": "https://electron-react-boilerplate.js.org"
     },
-    "contributors": [
-        {
-            "name": "Amila Welihinda",
-            "email": "amilajack@gmail.com",
-            "url": "https://github.com/amilajack"
-        }
-    ],
     "main": "./tooling/devbuilds/main.js",
     "scripts": {
         "build": "concurrently \"npm run build:main\" \"npm run build:renderer\"",
@@ -110,12 +88,12 @@
         "productName": "ElectronReact",
         "appId": "org.erb.ElectronReact",
         "asar": false,
+        "npmRebuild": false,
         "files": [
             "dist",
             "node_modules",
             "package.json"
         ],
-        "afterSign": "tooling/scripts/notarize.js",
         "win": {
             "target": [
                 "nsis"
@@ -128,25 +106,6 @@
         },
         "extraResources": [
             "./assets/**"
-        ],
-        "publish": {
-            "provider": "github",
-            "owner": "electron-react-boilerplate",
-            "repo": "electron-react-boilerplate"
-        }
-    },
-    "collective": {
-        "url": "https://opencollective.com/electron-react-boilerplate-594"
-    },
-    "devEngines": {
-        "node": ">=14.x",
-        "npm": ">=7.x"
-    },
-    "electronmon": {
-        "patterns": [
-            "!**/**",
-            "src/main/**"
-        ],
-        "logLevel": "quiet"
+        ]
     }
 }

@@ -1,5 +1,5 @@
-import { Tray, Menu, app } from "electron"
-import path from "path"
+import { getAssetPath } from "common/utils"
+import { Tray, Menu } from "electron"
 import robot from "robotjs"
 
 let next: Tray
@@ -33,18 +33,9 @@ const destroyMediaTrays = () => {
     playPause.destroy()
 }
 
-const RESOURCES_PATH = app.isPackaged
-    ? path.join(process.resourcesPath, 'assets')
-    : path.join(__dirname, '../../assets')
-
-const getAssetPath = (...paths: string[]): string => {
-    return path.join(RESOURCES_PATH, ...paths)
-}
-
 const createMainTray = (showCallback, quitCallback) => {
 
-
-    mainIcon = new Tray(getAssetPath("favicon.ico"))
+    mainIcon = new Tray(getAssetPath("smallicon.ico"))
     mainIcon.addListener("click", () => {
         showCallback()
     })

@@ -8,7 +8,7 @@ import Regex from './Regex'
 import Wifi from './Wifi'
 import Uppercase from './Uppercase'
 import ClipboardSync from './ClipboardSync'
-import favicon from "../../assets/favicon.png"
+import favicon from "../../assets/smallicon.png"
 
 const titleBarHeight = 41
 

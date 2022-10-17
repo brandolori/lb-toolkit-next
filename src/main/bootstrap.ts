@@ -1,4 +1,4 @@
-import path, { join } from 'path'
+import path from 'path'
 import robot from "robotjs"
 import { getSettingValue, settingsChangeEmitter } from "./settings"
 import { globalShortcut, clipboard, BrowserWindow, app, ipcMain, nativeTheme, screen } from "electron"
