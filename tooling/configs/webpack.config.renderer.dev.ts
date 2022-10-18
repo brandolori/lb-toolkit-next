@@ -42,7 +42,6 @@ const configuration: webpack.Configuration = {
                         loader: 'css-loader',
                         options: {
                             modules: true,
-                            sourceMap: true,
                             importLoaders: 1,
                         },
                     },

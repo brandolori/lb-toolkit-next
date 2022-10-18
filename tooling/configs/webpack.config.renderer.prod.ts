@@ -7,13 +7,8 @@ import { merge } from 'webpack-merge'
 import TerserPlugin from 'terser-webpack-plugin'
 import baseConfig from './webpack.config.base'
 import webpackPaths from './webpack.paths'
-import deleteSourceMaps from '../scripts/delete-source-maps'
-
-deleteSourceMaps()
 
 const configuration: webpack.Configuration = {
-    devtool: 'source-map',
-
     mode: 'production',
 
     target: ['web', 'electron-renderer'],
@@ -39,7 +34,6 @@ const configuration: webpack.Configuration = {
                         loader: 'css-loader',
                         options: {
                             modules: true,
-                            sourceMap: true,
                             importLoaders: 1,
                         },
                     },
@@ -89,6 +83,17 @@ const configuration: webpack.Configuration = {
         minimizer: [
             new TerserPlugin({
                 parallel: true,
+                terserOptions: {
+                    compress: {
+                        // weird things with React
+                        // booleans_as_integers: true,
+                        drop_console: true,
+                        ecma: 2020,
+                        keep_fargs: false,
+                        passes: 5,
+                        toplevel: true,
+                    }
+                }
             }),
             new CssMinimizerPlugin(),
         ],
