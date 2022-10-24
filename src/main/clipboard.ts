@@ -3,6 +3,18 @@ import { getSettingValue } from "./settings"
 import clipboardListener from 'clipboard-event'
 import { ipcMain } from "electron"
 
+export type DateFilter = "today" | "this week" | "this month" | "all"
+
+export type ClipSource = "pc" | "phone"
+
+export type Clip = {
+    id: string,
+    date: string,
+    text: string,
+    source: ClipSource,
+    isUrl: boolean
+}
+
 const getTableClient = () => {
     const account = getSettingValue("azureStorageAccount")
     const SASToken = getSettingValue("azureSASToken")
@@ -12,7 +24,6 @@ const getTableClient = () => {
         tableName,
         new AzureSASCredential(SASToken)
     )
-
 }
 
 const startClipboardListener = (callback) => {
@@ -25,24 +36,27 @@ const stopClipboardListener = () => {
     clipboardListener.stopListening()
 }
 
-
-const fetchClips = async (filter) => {
-    const data = []
-    const tableClient = getTableClient()
-    const days = filter == "today" ? 1 :
-        filter == "this week" ? 7 :
-            filter == "this month" ? 30 : 100000
+const fetchClips = async (dateFilter?: DateFilter): Promise<Clip[]> => {
+    const days = dateFilter == "today" ? 1 :
+        dateFilter == "this week" ? 7 :
+            dateFilter == "this month" ? 30 : 100000
     const filterDate = new Date(Date.now() - days * 24 * 60 * 60 * 1000) // 1 days ago
-    for await (const entity of tableClient.listEntities({
+
+    const data: Clip[] = []
+    const client = getTableClient()
+    const lister = client.listEntities({
         queryOptions: {
             filter: odata`Timestamp ge ${filterDate}`,
         }
-    })) {
+    })
+
+    for await (const entity of lister) {
         data.push({
             date: entity.timestamp,
             id: entity.rowKey,
-            source: entity.partitionKey,
-            text: entity.text
+            source: entity.partitionKey as "pc" | "phone",
+            text: entity.text as string,
+            isUrl: entity.isUrl as boolean ?? false
         })
     }
 

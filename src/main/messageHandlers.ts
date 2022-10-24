@@ -88,6 +88,10 @@ export default () => {
         shell.showItemInFolder(path)
     })
 
+    ipcMain.on("fs:openUrl", async (ev, url) => {
+        shell.openExternal(url)
+    })
+
     ipcMain.handle('wifi:retrieveConnectionDetails', async () => {
         const ssid = await getWifiSSID()
         const password = await getWifiPassword(ssid)

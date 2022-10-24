@@ -1,17 +1,7 @@
-import { ActionIcon, Alert, Button, Card, Group, NativeSelect, Space, Stack, Text } from "@mantine/core"
+import { ActionIcon, Alert, Card, Group, NativeSelect, Space, Stack, Text } from "@mantine/core"
+import { Clip, DateFilter } from "main/clipboard"
 import { useEffect, useState } from "react"
 import { AiOutlineReload, AiOutlineWarning } from "react-icons/ai"
-
-type DateFilter = "today" | "this week" | "this month" | "all"
-
-type ClipSource = "pc" | "phone"
-
-type Clip = {
-    id: string,
-    date: string,
-    text: string,
-    source: ClipSource
-}
 
 export default () => {
     const [clips, setClips] = useState<Clip[]>([])
@@ -61,7 +51,12 @@ export default () => {
                         window.electronAPI.clipboardPaste(el.text)
                         setLastCopied(el.id)
                     }}>
-                    <Text style={{ overflowWrap: "anywhere", userSelect: "text" }}>
+                    <Text
+                        style={{ overflowWrap: "anywhere", userSelect: "text", textDecoration: el.isUrl ? "underline" : "none" }}
+                        onClick={el.isUrl ? ((ev) => {
+                            ev.stopPropagation()
+                            window.electronAPI.openUrl(el.text)
+                        }) : undefined}>
                         {el.text.substring(0, 200)}
                         {el.text.length > 200 && "..."}
                     </Text>
@@ -71,7 +66,6 @@ export default () => {
                             {new Date(el.date).toLocaleString("en-uk")}
                         </Text>
                         <Group>
-
                             <Text color="dimmed" size="xs" weight="bold">{lastCopied == el.id && <>COPIED</>}</Text>
                             <Text color="dimmed" size="xs" weight="bold">
                                 {el.source == "pc"
