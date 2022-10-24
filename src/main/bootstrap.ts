@@ -23,11 +23,19 @@ const startListeningToClipboard = () => {
 
             const text = clipboard.readText()
 
+            let isUrl = false
+
+            try {
+                new URL(text)
+                isUrl = true
+            } catch (e) { }
+
             if (text.replace("\r", "").replace(" ", "").replace("\n", "").length > 0) {
                 await tableClient.createEntity({
                     partitionKey: "pc",
                     rowKey: Date.now().toString(),
-                    text: clipboard.readText()
+                    text: clipboard.readText(),
+                    isUrl
                 })
                 mainWindow?.webContents.send('clipboard:change')
             }
