@@ -37,7 +37,7 @@ const showFolder = async (path: string) => {
     window.electronAPI.openFolder(substitutedPath)
 }
 
-export default () => {
+const Cleaner = () => {
 
     const [sizes, setSizes] = useState<{ path: string, size: number }[]>([])
     const [loading, setLoading] = useState(true)
@@ -121,3 +121,5 @@ export default () => {
         )}
     </Stack>
 }
+
+export default Cleaner

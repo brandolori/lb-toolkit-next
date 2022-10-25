@@ -43,7 +43,7 @@ const openSettingsFile = async () => {
     window.electronAPI.openFolder(substitutedPath)
 }
 
-export default () => {
+const AppSettings = () => {
 
     const [settingsState, setSettingsState] = useState<SettingState[]>(defaultState)
 
@@ -84,3 +84,5 @@ export default () => {
         </Group>
     </Stack >
 }
+
+export default AppSettings

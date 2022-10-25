@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import AppSettings from "./AppSettings"
 import SystemSettings from "./SystemSettings"
 
-export default () => {
+const Home = () => {
 
     const [appVersion, setAppVersion] = useState("")
 
@@ -27,3 +27,5 @@ export default () => {
 
     </Stack>
 }
+
+export default Home

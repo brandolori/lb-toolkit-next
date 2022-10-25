@@ -10,8 +10,7 @@ type SettingsType = {
     values?: any[]
 }
 
-
-export default () => {
+const SystemSettings = () => {
 
     const [hypervisorState, setHypervisorState] = useState(false)
     const [hypervisorLoading, setHypervisorLoading] = useState(true)
@@ -89,3 +88,5 @@ export default () => {
         }
     </Stack >
 }
+
+export default SystemSettings

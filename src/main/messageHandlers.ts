@@ -6,7 +6,7 @@ import { getSettingValue, setSettingValue } from "./settings"
 import { getAssetPath, handleCommand } from "../common/utils"
 import sudo from 'sudo-prompt'
 
-export default () => {
+const messageHandlers = () => {
     ipcMain.handle('cmd:fetchUpdates', async () => {
 
         const stdout = await handleCommand("winget", ["upgrade", "--include-unknown"]) as string
@@ -119,3 +119,5 @@ export default () => {
     })
 
 }
+
+export default messageHandlers

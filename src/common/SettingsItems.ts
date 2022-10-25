@@ -1,4 +1,4 @@
-export const DefaultValues = {
+const DefaultValues = {
     enableColorPicker: true,
     enableMediaControls: true,
     enableRunOnLogin: true,
@@ -9,3 +9,5 @@ export const DefaultValues = {
 }
 
 export type Settings = typeof DefaultValues
+
+export { DefaultValues }

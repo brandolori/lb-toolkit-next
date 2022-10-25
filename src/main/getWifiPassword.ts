@@ -1,6 +1,6 @@
 import { handleCommand } from '../common/utils'
 
-export default async (ssid: string) => {
+const getWifiPassword = async (ssid: string) => {
 	const cmd = 'netsh'
 	const args = ['wlan', 'show', 'profile', `name=${ssid}`, 'key=clear']
 
@@ -16,3 +16,4 @@ export default async (ssid: string) => {
 
 	return ret as string
 }
+export default getWifiPassword

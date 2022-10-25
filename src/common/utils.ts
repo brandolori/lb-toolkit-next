@@ -3,7 +3,7 @@ import path from "path"
 import fs from "fs"
 import { app } from "electron"
 
-export const dirSize = (directory: string) => {
+const dirSize = (directory: string) => {
     const files = fs.readdirSync(directory)
 
     return files.reduce((accumulator, file) => {
@@ -14,7 +14,7 @@ export const dirSize = (directory: string) => {
     }, 0)
 }
 
-export const handleCommand = (command, args) => new Promise<string>((res, rej) => {
+const handleCommand = (command, args) => new Promise<string>((res, rej) => {
     const proc = ChildProcess.spawn(command, args)
 
     let buffer = []
@@ -29,7 +29,7 @@ export const handleCommand = (command, args) => new Promise<string>((res, rej) =
     })
 })
 
-export const resolveHtmlPath = (htmlFileName: string, search: string = "") => {
+const resolveHtmlPath = (htmlFileName: string, search: string = "") => {
     if (process.env.NODE_ENV === 'development') {
         const port = process.env.PORT || 1212
         const url = new URL(`http://localhost:${port}`)
@@ -40,10 +40,12 @@ export const resolveHtmlPath = (htmlFileName: string, search: string = "") => {
     return `file://${path.resolve(__dirname, '../renderer/', htmlFileName)}${search}`
 }
 
-export const RESOURCES_PATH = app.isPackaged
+const RESOURCES_PATH = app.isPackaged
     ? path.join(process.resourcesPath, 'assets')
     : path.join(__dirname, '../../assets')
 
-export const getAssetPath = (...paths: string[]): string => {
+const getAssetPath = (...paths: string[]): string => {
     return path.join(RESOURCES_PATH, ...paths)
 }
+
+export { dirSize, handleCommand, resolveHtmlPath, getAssetPath }

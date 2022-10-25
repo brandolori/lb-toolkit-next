@@ -7,7 +7,7 @@ const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
 }
 
-export default () => {
+const Wifi = () => {
 
     const [qr, setQr] = useState("")
     const [ssid, setSsid] = useState("")
@@ -84,3 +84,5 @@ export default () => {
         </Group>
     </Stack >
 }
+
+export default Wifi

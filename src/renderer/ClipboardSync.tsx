@@ -3,7 +3,7 @@ import { Clip, DateFilter } from "main/clipboard"
 import { useEffect, useState } from "react"
 import { AiOutlineReload, AiOutlineWarning } from "react-icons/ai"
 
-export default () => {
+const ClipboardSync = () => {
     const [clips, setClips] = useState<Clip[]>([])
     const [loading, setLoading] = useState(false)
     const [showSyncAlert, setSyncEnabled] = useState(false)
@@ -80,3 +80,5 @@ export default () => {
         }
     </Stack>
 }
+
+export default ClipboardSync

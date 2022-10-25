@@ -2,7 +2,7 @@ import { Container } from "@mantine/core"
 import { useEffect } from "react"
 import ClipboardSync from "./ClipboardSync"
 
-export default () => {
+const ClipboardStandalone = () => {
     useEffect(() => {
         window.electronAPI.readyToShow()
     }, [])
@@ -10,3 +10,5 @@ export default () => {
         <ClipboardSync />
     </Container>
 }
+
+export default ClipboardStandalone

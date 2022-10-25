@@ -2,7 +2,7 @@ import { Stack, Textarea, Text, Card, SegmentedControl, Switch } from "@mantine/
 import { useEffect, useState } from "react"
 
 
-export default () => {
+const Uppercase = () => {
 
     const [inputString, setInputText] = useState("")
 
@@ -17,8 +17,6 @@ export default () => {
             return
 
         const regex = /\b[^.!?]+[.!?]+/g
-        let replacedString = ""
-        let index = 0
 
         const startingString = toLowerCase
             ? inputString.toLowerCase()
@@ -81,3 +79,5 @@ export default () => {
         </Card>
     </Stack>
 }
+
+export default Uppercase

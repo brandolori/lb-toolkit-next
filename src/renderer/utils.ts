@@ -1,5 +1,5 @@
 
-export const substitutePath = async (path: string) => {
+const substitutePath = async (path: string) => {
 
     let mutatedPath = path
 
@@ -21,3 +21,5 @@ export const substitutePath = async (path: string) => {
 
     return mutatedPath
 }
+
+export { substitutePath }

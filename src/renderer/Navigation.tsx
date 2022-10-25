@@ -25,7 +25,7 @@ type NavigationProps = {
     onChangeRoute: (route: string) => void
 }
 
-export default ({ route, routes, onChangeRoute }: NavigationProps) =>
+const Navigation = ({ route, routes, onChangeRoute }: NavigationProps) =>
     <Navbar width={{ base: 200 }} p="xs">
         {
             routes.map(el =>
@@ -37,3 +37,5 @@ export default ({ route, routes, onChangeRoute }: NavigationProps) =>
             )
         }
     </Navbar>
+
+export default Navigation

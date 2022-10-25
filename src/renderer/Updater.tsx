@@ -2,7 +2,7 @@ import { ActionIcon, Button, Group, Stack, Text } from "@mantine/core"
 import { useEffect, useState } from "react"
 import { AiOutlineReload } from "react-icons/ai"
 
-export default () => {
+const Updater = () => {
 
     const [upgradablePackages, setUpgradablePackages] = useState<string[]>([])
     const [currentlyUpgrading, setCurrentlyUpgrading] = useState<string[]>([])
@@ -63,3 +63,5 @@ export default () => {
         )}
     </Stack>
 }
+
+export default Updater

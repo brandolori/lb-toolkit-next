@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 
 type OutputData = { text: string, highlighted: boolean }
 
-export default () => {
+const Regex = () => {
 
     const [regex, setRegex] = useState("")
     const [validRegex, setValidRegex] = useState(true)
@@ -74,3 +74,5 @@ export default () => {
         </Card>
     </Stack>
 }
+
+export default Regex
