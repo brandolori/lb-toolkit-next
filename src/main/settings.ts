@@ -12,15 +12,15 @@ const file = fs.readFileSync(settingsFilePath, { flag: "a+" })
 let data: Settings
 
 try {
-    data = JSON.parse(file.toString()) as Settings
+    data = JSON.parse(file.toString())
 } catch (e) {
     data = { ...DefaultValues }
     fs.writeFileSync(settingsFilePath, JSON.stringify(data))
 }
 
 type SettingsEventEmitter = {
-    on: (key: keyof Settings, callback: (value: any) => void) => void
-    emit: (key: keyof Settings, value: any) => void
+    on: <T extends keyof Settings>(key: T, callback: (value: Settings[T]) => void) => void
+    emit: <T extends keyof Settings>(key: T, value: Settings[T]) => void
 }
 
 const settingsChangeEmitter = new EventEmitter() as SettingsEventEmitter
