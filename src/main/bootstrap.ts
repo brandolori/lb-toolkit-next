@@ -26,8 +26,9 @@ const startListeningToClipboard = () => {
             let isUrl = false
 
             try {
-                new URL(text)
-                isUrl = true
+                const url = new URL(text)
+                if (url.protocol == "https:" || url.protocol == "http:")
+                    isUrl = true
             } catch (e) { }
 
             if (text.replace("\r", "").replace(" ", "").replace("\n", "").length > 0) {
