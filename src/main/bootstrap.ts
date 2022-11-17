@@ -2,65 +2,24 @@ import path from 'path'
 import robot from "robotjs"
 import { getSettingValue, settingsChangeEmitter } from "./settings"
 import { globalShortcut, clipboard, BrowserWindow, app, ipcMain, nativeTheme, screen } from "electron"
-import { getTableClient, startClipboardListener, stopClipboardListener } from "./clipboard"
+import { startListeningToClipboard, stopListeningToClipboard } from "./clipboard"
 import { isLogin, registerAtLogin, unregisterAtLogin } from "./login"
 import initMessageHandlers from './messageHandlers'
 import { createMediaTrays, destroyMediaTrays, createMainTray } from './trays'
 import { resolveHtmlPath } from '../common/utils'
 
-let ignoreSingleCopy = false
-
-const startListeningToClipboard = () => {
-
-    const tableClient = getTableClient()
-
-    startClipboardListener(async () => {
-        if (clipboard.availableFormats().includes("text/plain")) {
-            if (ignoreSingleCopy) {
-                ignoreSingleCopy = false
-                return
-            }
-
-            const text = clipboard.readText()
-
-            let isUrl = false
-
-            try {
-                const url = new URL(text)
-                if (url.protocol == "https:" || url.protocol == "http:")
-                    isUrl = true
-            } catch (e) { }
-
-            if (text.replace("\r", "").replace(" ", "").replace("\n", "").length > 0) {
-                await tableClient.createEntity({
-                    partitionKey: "pc",
-                    rowKey: Date.now().toString(),
-                    text: clipboard.readText(),
-                    isUrl
-                })
-                mainWindow?.webContents.send('clipboard:change')
-            }
-        }
-    })
-
-}
-
-const stopListeningToClibpoard = () => {
-    stopClipboardListener()
-}
+const clipboardCallback = () => mainWindow?.webContents.send('clipboard:change')
 
 // enable clipboard listener, then register to settings change
 if (getSettingValue("enableClipboardSync"))
-    startListeningToClipboard()
+    startListeningToClipboard(clipboardCallback)
 
 settingsChangeEmitter.on("enableClipboardSync", (value) => {
     if (value)
-        startListeningToClipboard()
+        startListeningToClipboard(clipboardCallback)
     else
-        stopListeningToClibpoard()
+        stopListeningToClipboard()
 })
-
-
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -214,10 +173,6 @@ const onReady = () => {
     })
 
     initMessageHandlers()
-    ipcMain.on("clipboard:paste", (ev, text) => {
-        ignoreSingleCopy = true
-        clipboard.writeText(text)
-    })
 
     // make sure window are shown when React has rendered
     // how it works: every window has a webcontents id,

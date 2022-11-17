@@ -1,7 +1,7 @@
 import { AzureSASCredential, TableClient, odata } from "@azure/data-tables"
 import { getSettingValue } from "./settings"
 import clipboardListener from 'clipboard-event'
-import { ipcMain } from "electron"
+import { clipboard, ipcMain } from "electron"
 
 export type DateFilter = "today" | "this week" | "this month" | "all"
 
@@ -26,12 +26,53 @@ const getTableClient = () => {
     )
 }
 
-const startClipboardListener = (callback) => {
-    clipboardListener.on('change', callback)
+let ignoreSingleCopy = false
+let lastCopy = ""
+
+const startListeningToClipboard = (callback?: () => void) => {
+    const tableClient = getTableClient()
+
+    clipboardListener.on('change', async () => {
+        if (clipboard.availableFormats().includes("text/plain")) {
+            if (ignoreSingleCopy) {
+                ignoreSingleCopy = false
+                return
+            }
+
+            const text = clipboard.readText()
+
+            let isUrl = false
+
+            try {
+                const url = new URL(text)
+                if (url.protocol == "https:" || url.protocol == "http:")
+                    isUrl = true
+            } catch (e) { }
+
+            const notEmpty = text.replace("\r", "").replace(" ", "").replace("\n", "").length > 0
+            const notEqualToLast = text != lastCopy
+            lastCopy = text
+
+            if (notEmpty && notEqualToLast) {
+                await tableClient.createEntity({
+                    partitionKey: "pc",
+                    rowKey: Date.now().toString(),
+                    text: clipboard.readText(),
+                    isUrl
+                })
+                callback()
+            }
+        }
+    })
     clipboardListener.startListening()
 }
 
-const stopClipboardListener = () => {
+ipcMain.on("clipboard:paste", (ev, text) => {
+    ignoreSingleCopy = true
+    clipboard.writeText(text)
+})
+
+const stopListeningToClipboard = () => {
     clipboardListener.removeAllListeners()
     clipboardListener.stopListening()
 }
@@ -67,4 +108,4 @@ ipcMain.handle('clipboard:fetchClips', async (ev, filter) => {
     return await fetchClips(filter)
 })
 
-export { getTableClient, startClipboardListener, stopClipboardListener }
+export { getTableClient, startListeningToClipboard, stopListeningToClipboard }
