@@ -29,11 +29,6 @@ const routes: RouteObj[] = [
         component: Home
     },
     {
-        label: "📦 Updater",
-        name: "updater",
-        component: Updater
-    },
-    {
         label: "🧹 Cleaner",
         name: "cleaner",
         component: Cleaner
