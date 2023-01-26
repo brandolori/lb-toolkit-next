@@ -133,7 +133,7 @@ const configuration: webpack.Configuration = {
             console.log('Starting preload.js builder...')
 
             //spawn preload process
-            spawn('npm', ['run', 'start:preload'], {
+            spawn('npm', ['run', 'webpack:preload'], {
                 shell: true,
                 stdio: 'inherit',
             })
@@ -141,7 +141,7 @@ const configuration: webpack.Configuration = {
                 .on('error', (spawnError) => console.error(spawnError))
 
             //spawn main process
-            spawn('npm', ['run', 'start:main'], {
+            spawn('npm', ['run', 'webpack:main'], {
                 shell: true,
                 stdio: 'inherit',
             })

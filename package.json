@@ -8,15 +8,15 @@
     "main": "./tooling/devbuilds/main.js",
     "submodules": "tooling\\app\\package.json",
     "scripts": {
-        "build": "concurrently \"npm run build:main\" \"npm run build:renderer\"",
+        "build": "ts-node ./tooling/scripts/clean.ts dist && npm run rebuild && npm run build && ts-node ./tooling/scripts/package.ts",
+        "electron": "cross-env NODE_ENV=development electron .",
+        "webpack": "cross-env NODE_ENV=development webpack serve --config ./tooling/configs/webpack.config.renderer.dev.ts",
+        "build:all": "concurrently \"npm run build:main\" \"npm run build:renderer\"",
         "build:main": "cross-env NODE_ENV=production webpack --config ./tooling/configs/webpack.config.main.prod.ts",
         "build:renderer": "cross-env NODE_ENV=production webpack --config ./tooling/configs/webpack.config.renderer.prod.ts",
-        "package": "ts-node ./tooling/scripts/clean.ts dist && npm run rebuild && npm run build && ts-node ./tooling/scripts/package.ts",
-        "rebuild": "electron-rebuild --parallel --types prod,dev,optional --module-dir tooling/app",
-        "start:electron": "cross-env NODE_ENV=development electron .",
-        "start:main": "cross-env NODE_ENV=development webpack --config ./tooling/configs/webpack.config.main.dev.ts",
-        "start:preload": "cross-env NODE_ENV=development webpack --config ./tooling/configs/webpack.config.preload.dev.ts",
-        "start:webpack": "cross-env NODE_ENV=development webpack serve --config ./tooling/configs/webpack.config.renderer.dev.ts"
+        "build:rebuild": "electron-rebuild --parallel --types prod,dev,optional --module-dir tooling/app",
+        "webpack:main": "cross-env NODE_ENV=development webpack --config ./tooling/configs/webpack.config.main.dev.ts",
+        "webpack:preload": "cross-env NODE_ENV=development webpack --config ./tooling/configs/webpack.config.preload.dev.ts"
     },
     "dependencies": {
         "electron-debug": "^3.2.0",

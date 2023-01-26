@@ -29,7 +29,8 @@ let clipboardWindow: BrowserWindow
 
 let windowsByWebcontentsId = {}
 
-const colorPickerKeyCombo = 'super+control+x'
+const colorPickerKeyCombo = "super+control+x"
+const clipboardWindowKeyCombo = "super+control+z"
 
 const registerColorPicker = () => {
     globalShortcut.register(colorPickerKeyCombo, () => {
@@ -166,7 +167,7 @@ const onReady = () => {
             unregisterColorPicker()
     })
 
-    globalShortcut.register("super+control+b", () => {
+    globalShortcut.register(clipboardWindowKeyCombo, () => {
         if (!clipboardWindow) {
             createClipboardWindow()
         }
