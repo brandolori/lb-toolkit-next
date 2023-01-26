@@ -8,7 +8,7 @@
     "main": "./tooling/devbuilds/main.js",
     "submodules": "tooling\\app\\package.json",
     "scripts": {
-        "build": "ts-node ./tooling/scripts/clean.ts dist && npm run rebuild && npm run build && ts-node ./tooling/scripts/package.ts",
+        "build": "ts-node ./tooling/scripts/clean.ts dist && npm run build:rebuild && npm run build:all && ts-node ./tooling/scripts/package.ts",
         "electron": "cross-env NODE_ENV=development electron .",
         "webpack": "cross-env NODE_ENV=development webpack serve --config ./tooling/configs/webpack.config.renderer.dev.ts",
         "build:all": "concurrently \"npm run build:main\" \"npm run build:renderer\"",
